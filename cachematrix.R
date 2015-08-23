@@ -1,8 +1,13 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Programming Assignment 2
+## This is straightforward code following the example given in the
+## programming assignment 2.
 
-## Write a short comment describing this function
-
+## Given a matrix, creates a "api" to store and cache the matrix and its
+## inverse. The api is a list containing:
+##   A set function to change the matrix
+##   A get function to return the matrix
+##   A setinverse function to store the matrix inverse
+##   A getinverse function to return the matrix inverse
 makeCacheMatrix <- function(x = matrix()) {
     I <- NULL
     set <- function(y) { x <<- y; I <<- NULL }
@@ -15,17 +20,15 @@ makeCacheMatrix <- function(x = matrix()) {
          getinverse = getinverse)
 }
 
-
-## Write a short comment describing this function
-
+## Given the list returned by the makeCacheMatrix function, computes
+## the inverse of the matrix if the inverse is not already cached.
 cacheSolve <- function(x, ...) {
-    ## Return a matrix that is the inverse of 'x' 
     I <- x$getinverse()
     if(!is.null(I)) {
         message("getting cached data")
         return(I)
     }
     I <- solve(x$get())
-    x$setinverse(I)
+    x$setinverse(I, ...)
     I
 }
